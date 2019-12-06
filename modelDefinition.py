@@ -4,9 +4,22 @@
 # IDE : PyCharm
 # Description : 定义 NN
 # Github : https://github.com/liuxw123
+from abc import ABCMeta, abstractmethod
 
 from torch import nn
-from modelConfig import DELIMITER, LAYER
+from modelConfig import LAYER
+from commonInterface import Common
+
+
+class ModelInterface(Common, nn.Module, metaclass=ABCMeta):
+
+    def __init__(self, key: str) -> None:
+        super().__init__(key)
+        self.model = None
+
+    @abstractmethod
+    def creatModel(self):
+        pass
 
 
 class PstModel(nn.Module):
@@ -29,7 +42,6 @@ class PstModel(nn.Module):
     def modelV0(self):
         """
         v0版本的model创建
-        :param key:
         :return:
         """
         hidden = LAYER
