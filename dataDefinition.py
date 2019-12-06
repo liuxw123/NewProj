@@ -10,28 +10,18 @@ import numpy as np
 from DataOprt.dataset import DataSet
 from common import *
 from modelConfig import DELIMITER
+from commonInterface import Common
+
 
 from torch.utils.data import Dataset
 
 from abc import abstractmethod, ABCMeta
 
 
-class DataDefinition(metaclass=ABCMeta):
+class DataDefinition(Common, metaclass=ABCMeta):
 
     def __init__(self, key: str) -> None:
-        super().__init__()
-        self.key = None
-        self.setKey(key)
-
-    def setKey(self, key):
-        self.key = key
-
-    def getKey(self):
-        return self.key
-
-    @abstractmethod
-    def checkKey(self, key: str):
-        pass
+        super().__init__(key)
 
     @abstractmethod
     def getData(self):
