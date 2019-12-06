@@ -7,7 +7,7 @@
 
 from torch.utils.data import Dataset
 
-from dataDefinition import PostProcess
+from dataDefinitionImpl import DataDefinitionImplV0
 
 import torch
 import numpy as np
@@ -17,21 +17,6 @@ class TrainData(Dataset):
     """
     data stream:
                                     TrainData(trainData.py)
-                                             /\
-                                            /||\
-                                             ||
-                                             ||
-                                    PostProcess(dataDefinition.py)
-                                             /\
-                                            /||\
-                                             ||
-                                             ||
-                                    MyData(dataDefinition.py)
-                                             /\
-                                            /||\
-                                             ||
-                                             ||
-        MyData.LabelDef(dataDefinition.py)          MyData.CommitData(dataDefinition.py)
 
 
     """
@@ -39,7 +24,7 @@ class TrainData(Dataset):
     def __init__(self, trainRate: float, key: str) -> None:
         super().__init__()
 
-        self.xTrain, self.yTrain, self.xTest, self.yTest = PostProcess(trainRate, key).process()
+        self.xTrain, self.yTrain, self.xTest, self.yTest = DataDefinitionImplV0(trainRate).getData(key)
 
         self.phase = None
         self.xData = None

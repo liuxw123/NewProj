@@ -5,8 +5,6 @@
 # Description : 定义模型标签，应注意所有定义情况，测试结果都应该记录该类中
 # Github : https://github.com/liuxw123
 
-import numpy as np
-from torch.utils.data import Dataset
 from abc import abstractmethod, ABCMeta
 
 from commonInterface import Common
@@ -152,38 +150,38 @@ class DataDefinition(Common, metaclass=ABCMeta):
 #             return inData, np.asarray(labels)
 
 
-class PostProcess(Dataset):
-    """
-    后置处理的类，主要是随机打乱，类型转换，训练集测试集划分等操作，不改变本体数据
-    """
-
-    def __init__(self, train: float, key: str) -> None:
-        super().__init__()
-
-        self.train = train
-
-        self.myData = MyData(key)
-        xd, yd = self.myData.getData()
-        self.xData = xd
-        self.yData = yd
-
-    def process(self):
-        dim = self.xData.ndim
-        nSample = self.xData.shape[0]
-        train = int(self.train * nSample)
-        # test = nSample - train
-
-        random = np.random.permutation(nSample)
-        shuffledXData = self.xData[random]
-        shuffledYData = self.yData[random]
-
-        if dim == 2:
-            trainXData = shuffledXData[:train]
-            trainYData = shuffledYData[:train]
-            testXData = shuffledXData[train:]
-            testYData = shuffledYData[train:]
-
-        return trainXData, trainYData, testXData, testYData
+# class PostProcess(Dataset):
+#     """
+#     后置处理的类，主要是随机打乱，类型转换，训练集测试集划分等操作，不改变本体数据
+#     """
+#
+#     def __init__(self, train: float, key: str) -> None:
+#         super().__init__()
+#
+#         self.train = train
+#
+#         self.myData = MyData(key)
+#         xd, yd = self.myData.getData()
+#         self.xData = xd
+#         self.yData = yd
+#
+#     def process(self):
+#         dim = self.xData.ndim
+#         nSample = self.xData.shape[0]
+#         train = int(self.train * nSample)
+#         # test = nSample - train
+#
+#         random = np.random.permutation(nSample)
+#         shuffledXData = self.xData[random]
+#         shuffledYData = self.yData[random]
+#
+#         if dim == 2:
+#             trainXData = shuffledXData[:train]
+#             trainYData = shuffledYData[:train]
+#             testXData = shuffledXData[train:]
+#             testYData = shuffledYData[train:]
+#
+#         return trainXData, trainYData, testXData, testYData
 
 # usage
 # dataset = PostProcess(0.9)

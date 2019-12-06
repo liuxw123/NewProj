@@ -25,7 +25,7 @@ class DataDefinitionImplV0(DataDefinition):
 
     def __init__(self, train) -> None:
         # TODO  right key
-        super().__init__("hints")
+        super().__init__("v0-0-0-0")
 
         self.train = train
         self.string = ""
