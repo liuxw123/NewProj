@@ -49,5 +49,21 @@ def stripBlankSpace(string: str, mode=0) -> str:
         while cnt > 0 and (string[cnt] == " " or string[cnt] == "\n"):
             cnt -= 1
 
-        return string[:cnt+1]
+        return string[:cnt + 1]
 
+
+def arrayString(arr: list) -> str:
+    """
+    实数序列字符串
+    :param arr: 实数序列
+    :return: 字符串
+    """
+    string = "["
+
+    for num in arr:
+        string += "{}, ".format(num)
+    try:
+        string = string[:-2] + "]"
+    except Exception:
+        string = "[]"
+    return string
