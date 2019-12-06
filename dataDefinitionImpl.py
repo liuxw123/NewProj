@@ -55,10 +55,19 @@ class DataDefinitionImplV0(DataDefinition):
             raise ValueError("版本不匹配！ 程序退出.")
 
     def getData(self, key: str) -> tuple:
+        """
+        见父类描述
+        :param key: dst key. for check
+        :return: 训练所需数据(xTrain, yTrain, xTest, yTest) if checked.
+        """
         self.checkKey(key)
         return self.postProcess(self.getXY(self.labelDef()))
 
     def labelDef(self):
+        """
+        v0版本的定义位置点所属类
+        :return: 分类结果
+        """
 
         # TODO  decide by modelConfig
 
@@ -75,7 +84,11 @@ class DataDefinitionImplV0(DataDefinition):
         return class1, class2, class3
 
     def getXY(self, labelInfo: tuple) -> tuple:
-
+        """
+        获取 input data & target data
+        :param labelInfo: 分类信息数据
+        :return:
+        """
         labels = []
         inData = None
         for k, item in enumerate(labelInfo):
@@ -92,6 +105,11 @@ class DataDefinitionImplV0(DataDefinition):
         return inData, np.asarray(labels)
 
     def postProcess(self, data):
+        """
+        随机打乱数据，分出train & test 数据
+        :param data: input data & target data
+        :return:
+        """
         xData, yData = data
         dim = xData.ndim
         nSample = xData.shape[0]
