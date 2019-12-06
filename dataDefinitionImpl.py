@@ -4,6 +4,7 @@
 # IDE : PyCharm
 # Description : DataDefinition 实现类
 # Github : https://github.com/liuxw123
+
 from DataOprt.dataset import DataSet
 from common import NUM_TIMES, NUM_ANTENNA, IS_COMPLEX
 from dataDefinition import DataDefinition
@@ -15,22 +16,36 @@ import numpy as np
 
 class DataDefinitionImplV0(DataDefinition):
 
-    def toString(self):
+    def toString(self) -> str:
+        """
+        描述此类
+        :return: 描述信息
+        """
         return self.string
 
     def details(self):
+        """
+        用于后续汇总输出信息时使用，
+        :return: 返回出必要的记录信息
+        """
         # TODO
         pass
 
-    def __init__(self, train) -> None:
+    def __init__(self, train: float) -> None:
         # TODO  right key
         super().__init__("v0-3-0-0")
 
-        self.train = train
-        self.string = ""
+        assert 0 < train < 1
+        self.train = train  # 训练集比例
+        self.string = ""  # toString() 记录
         self.dataset = DataSet().getData(dim=3)  # 264 * 10 * 16
 
-    def checkKey(self, key: str):
+    def checkKey(self, key: str) -> None:
+        """
+        check key,查看此类是否能用于目标Key
+        :param key: 目标Key
+        :return:
+        """
         version1, sub1, _, dataVersion1 = key.split(DELIMITER)
         version2, sub2, _, dataVersion2 = self.key.split(DELIMITER)
 
