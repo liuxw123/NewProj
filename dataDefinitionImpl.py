@@ -16,8 +16,7 @@ import numpy as np
 class DataDefinitionImplV0(DataDefinition):
 
     def toString(self):
-        # TODO
-        pass
+        return self.string
 
     def details(self):
         # TODO
@@ -25,7 +24,7 @@ class DataDefinitionImplV0(DataDefinition):
 
     def __init__(self, train) -> None:
         # TODO  right key
-        super().__init__("v0-0-0-0")
+        super().__init__("v0-3-0-0")
 
         self.train = train
         self.string = ""
@@ -45,6 +44,8 @@ class DataDefinitionImplV0(DataDefinition):
         return self.postProcess(self.getXY(self.labelDef()))
 
     def labelDef(self):
+
+        # TODO  decide by modelConfig
 
         class1 = [x for x in range(0, 61)]
         class2 = [x for x in range(157, 204)]

@@ -24,16 +24,15 @@ class PstModel(nn.Module):
         :return:
         """
         if key.startswith("v0"):
-            self.modelV0(key)
+            self.modelV0()
 
-    def modelV0(self, key: str):
+    def modelV0(self):
         """
         v0版本的model创建
         :param key:
         :return:
         """
-        version = key.split(DELIMITER)[2]
-        hidden = LAYER[int(version)]
+        hidden = LAYER
         part = []
 
         for i in range(len(hidden) - 2):
