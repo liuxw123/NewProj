@@ -6,10 +6,12 @@
 # Github : https://github.com/liuxw123
 
 
-from common import *
 from DataOprt.utils import readFile, stripBlankSpace
 
 import numpy as np
+
+from values.strings import PATH_ORIG_DATA
+from values.values import NUM_TIMES, NUM_POINT, NUM_ANTENNA, IS_COMPLEX, NUM_DETECTION_USER
 
 
 class DataSet:

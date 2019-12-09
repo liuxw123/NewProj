@@ -64,10 +64,15 @@ class PstModelV0(ModelInterface):
 
     def details(self):
         # TODO details
-        pass
+        info = {"name": type(self).__name__, "hidden layer": LAYER}
+        return info
 
     def forward(self, x):
-
+        """
+        forward propagation
+        :param x:
+        :return:
+        """
         for layer in self.model:
             x = layer(x)
 

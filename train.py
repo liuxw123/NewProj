@@ -18,6 +18,7 @@ TRAIN_RATE = 0.9
 BATCH_SIZE = 32
 LR = 0.001
 EPOCH = 200
+ADJUST_EPOCH = [30, 70]
 
 dataSet = TrainData(TRAIN_RATE, KEY)  # default is train phase
 dataLoader = DataLoader(dataSet, batch_size=BATCH_SIZE, shuffle=True, num_workers=0, collate_fn=collate)
@@ -28,8 +29,6 @@ optimizer = Adam(model.parameters(), lr=LR, weight_decay=0.0001)
 
 
 def adjustLearningRate(epoch):
-    ADJUST_EPOCH = [30, 70]
-
     if epoch not in ADJUST_EPOCH:
         return
 
@@ -40,8 +39,13 @@ def adjustLearningRate(epoch):
         para['lr'] = lr
 
 
-def logging():
-    pass
+def log():
+    info1 = dataSet.dataHolder.details()
+    info2 = model.details()
+
+    info3 = {"batch": BATCH_SIZE, "optimizer": type(optimizer).__name__, "lr": LR, "epoch": EPOCH,
+             "loss function": type(lossFunc).__name__}
+    return info1, info2, info3
 
 
 def save():
@@ -90,4 +94,4 @@ def main(numEpoch):
 
 if __name__ == '__main__':
     main(EPOCH)
-    logging()
+    log()

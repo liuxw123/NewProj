@@ -5,6 +5,8 @@
 # Description : 字符串常量
 # Github : https://github.com/liuxw123
 
+DELIMITER = "-"
+
 VERSION_NOT_SUPPORTED = "版本不匹配！ 程序退出."
 
 # 文件夹相关变量

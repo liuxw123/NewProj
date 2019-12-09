@@ -5,12 +5,12 @@
 # Description : model configuration
 # Github : https://github.com/liuxw123
 
-from values.value import NUM_ANTENNA, IS_COMPLEX
-
-DELIMITER = "-"
+from values.values import NUM_ANTENNA, IS_COMPLEX
+from values.strings import DELIMITER
 
 #  ---------------------v0--------------------------
 
+# description
 # head version. priority is highest
 VERSION = "v0"  # v0 是个简单的多分类模型
 # sub version. priority is 2nd

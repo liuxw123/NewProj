@@ -6,7 +6,7 @@
 # Github : https://github.com/liuxw123
 
 from DataOprt.dataset import DataSet
-from values.value import NUM_TIMES, NUM_ANTENNA, IS_COMPLEX
+from values.values import NUM_TIMES, NUM_ANTENNA, IS_COMPLEX
 from dataDefinition import DataDefinition
 from modelConfig import DELIMITER
 from DataOprt.utils import arrayString
@@ -30,14 +30,19 @@ class DataDefinitionImplV0(DataDefinition):
         :return: 返回出必要的记录信息
         """
         # TODO details
-        pass
+        info = {"name": type(self).__name__, "input": "CSI data(dimension: 16[8*2]).", "target": "one-hot (3 classes).",
+                "rate": self.train, "shuffle": self.shuffle, "classes": self.classes}
 
-    def __init__(self, train: float) -> None:
+        return info
+
+    def __init__(self, train: float, shuffle=True) -> None:
         super().__init__()
 
         assert 0 < train < 1
         self.train = train  # 训练集比例
         self.dataset = DataSet().getData(dim=3)  # 264 * 10 * 16
+        self.shuffle = shuffle
+        self.classes = None
 
     def checkKey(self, key: str) -> None:
         """
@@ -75,11 +80,7 @@ class DataDefinitionImplV0(DataDefinition):
         class2 = [x for x in range(157, 204)]
         class3 = [x for x in range(216, 264)]
 
-        string = "class 1: " + arrayString(class1) + "\n"
-        string += "class 2: " + arrayString(class2) + "\n"
-        string += "class 3: " + arrayString(class3) + "\n"
-
-        self.string = string
+        self.classes = [class1, class2, class3]
 
         return class1, class2, class3
 
@@ -116,8 +117,12 @@ class DataDefinitionImplV0(DataDefinition):
         train = int(self.train * nSample)
 
         random = np.random.permutation(nSample)
-        shuffledXData = xData[random]
-        shuffledYData = yData[random]
+        if self.shuffle:
+            shuffledXData = xData[random]
+            shuffledYData = yData[random]
+        else:
+            shuffledXData = xData
+            shuffledYData = yData
 
         if dim == 2:
             trainXData = shuffledXData[:train]
