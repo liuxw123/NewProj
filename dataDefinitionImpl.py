@@ -10,18 +10,12 @@ from common import NUM_TIMES, NUM_ANTENNA, IS_COMPLEX
 from dataDefinition import DataDefinition
 from modelConfig import DELIMITER
 from DataOprt.utils import arrayString
+from values.strings import VERSION_NOT_SUPPORTED
 
 import numpy as np
 
 
 class DataDefinitionImplV0(DataDefinition):
-
-    def toString(self) -> str:
-        """
-        描述此类
-        :return: 描述信息
-        """
-        return self.string
 
     def details(self):
         """
@@ -37,7 +31,6 @@ class DataDefinitionImplV0(DataDefinition):
 
         assert 0 < train < 1
         self.train = train  # 训练集比例
-        self.string = ""  # toString() 记录
         self.dataset = DataSet().getData(dim=3)  # 264 * 10 * 16
 
     def checkKey(self, key: str) -> None:
@@ -52,7 +45,7 @@ class DataDefinitionImplV0(DataDefinition):
         if version1 == version2 and sub1 == sub2 and dataVersion1 == dataVersion2:
             return
         else:
-            raise ValueError("版本不匹配！ 程序退出.")
+            raise ValueError(VERSION_NOT_SUPPORTED)
 
     def getData(self, key: str) -> tuple:
         """

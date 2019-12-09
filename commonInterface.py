@@ -13,6 +13,7 @@ class Common(metaclass=ABCMeta):
         super().__init__()
         self.key = None  # 类的唯一使用标识，不匹配，说明此类不可使用
         self.setKey(key)
+        self.string = ""
 
     def setKey(self, key) -> None:
         """
@@ -38,13 +39,12 @@ class Common(metaclass=ABCMeta):
         """
         pass
 
-    @abstractmethod
     def toString(self):
         """
         描述此类
         :return: 描述信息
         """
-        pass
+        return self.string
 
     @abstractmethod
     def details(self):
