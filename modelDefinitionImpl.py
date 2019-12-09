@@ -14,10 +14,10 @@ from torch import nn
 
 class PstModelV0(ModelInterface):
     """
-    TODO right key
+    TODO input right key
 
-    v0: 说明这是一个多分类定义模型
-    0 : 模型为第0次定义
+    v0: version. 说明这是一个多分类定义模型
+    0 : modelVersion. 模型为第0次定义
     """
     KEY = "v0-x-0-x"
 
@@ -63,7 +63,7 @@ class PstModelV0(ModelInterface):
             raise ValueError(VERSION_NOT_SUPPORTED)
 
     def details(self):
-        # TODO
+        # TODO details
         pass
 
     def forward(self, x):

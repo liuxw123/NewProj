@@ -17,10 +17,10 @@ import numpy as np
 
 class DataDefinitionImplV0(DataDefinition):
     """
-    TODO right key
-    
-    v0： 说明这是一个多分类定义模型
-    3 ： 三分类
+    TODO input right key
+
+    v0： version. 说明这是一个多分类定义模型
+    3 ： subVersion. 三分类
     """
     KEY = "v0-3-x-x"
 
@@ -29,7 +29,7 @@ class DataDefinitionImplV0(DataDefinition):
         用于后续汇总输出信息时使用，
         :return: 返回出必要的记录信息
         """
-        # TODO
+        # TODO details
         pass
 
     def __init__(self, train: float) -> None:
@@ -45,6 +45,7 @@ class DataDefinitionImplV0(DataDefinition):
         :param key: 目标Key
         :return:
         """
+        # TODO check key
         version1, sub1, _, dataVersion1 = key.split(DELIMITER)
         version2, sub2, _, dataVersion2 = DataDefinitionImplV0.KEY.split(DELIMITER)
 
