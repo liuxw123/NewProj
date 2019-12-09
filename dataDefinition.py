@@ -15,8 +15,8 @@ class DataDefinition(Common, metaclass=ABCMeta):
     定义数据如何制作，都应该继承此类
     """
 
-    def __init__(self, key: str) -> None:
-        super().__init__(key)
+    def __init__(self) -> None:
+        super().__init__()
 
     @abstractmethod
     def getData(self) -> tuple:

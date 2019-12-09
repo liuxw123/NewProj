@@ -16,6 +16,13 @@ import numpy as np
 
 
 class DataDefinitionImplV0(DataDefinition):
+    """
+    TODO right key
+    
+    v0： 说明这是一个多分类定义模型
+    0 ： 三分类
+    """
+    KEY = "v0-0-x-x"
 
     def details(self):
         """
@@ -26,8 +33,7 @@ class DataDefinitionImplV0(DataDefinition):
         pass
 
     def __init__(self, train: float) -> None:
-        # TODO  right key
-        super().__init__("v0-3-0-0")
+        super().__init__()
 
         assert 0 < train < 1
         self.train = train  # 训练集比例
@@ -40,9 +46,9 @@ class DataDefinitionImplV0(DataDefinition):
         :return:
         """
         version1, sub1, _, dataVersion1 = key.split(DELIMITER)
-        version2, sub2, _, dataVersion2 = self.key.split(DELIMITER)
+        version2, sub2, _, dataVersion2 = DataDefinitionImplV0.KEY.split(DELIMITER)
 
-        if version1 == version2 and sub1 == sub2 and dataVersion1 == dataVersion2:
+        if version1 == version2 and sub1 == sub2:
             return
         else:
             raise ValueError(VERSION_NOT_SUPPORTED)
@@ -62,7 +68,7 @@ class DataDefinitionImplV0(DataDefinition):
         :return: 分类结果
         """
 
-        # TODO  decide by modelConfig
+        # TODO  labels decide by this
 
         class1 = [x for x in range(0, 61)]
         class2 = [x for x in range(157, 204)]

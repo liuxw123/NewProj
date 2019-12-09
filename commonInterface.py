@@ -9,26 +9,9 @@ from abc import ABCMeta, abstractmethod
 
 class Common(metaclass=ABCMeta):
 
-    def __init__(self, key: str) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self.key = None  # 类的唯一使用标识，不匹配，说明此类不可使用
-        self.setKey(key)
         self.string = ""
-
-    def setKey(self, key) -> None:
-        """
-        set key
-        :param key: dst key
-        :return:
-        """
-        self.key = key
-
-    def getKey(self) -> str:
-        """
-        get key
-        :return: key
-        """
-        return self.key
 
     @abstractmethod
     def checkKey(self, key: str) -> None:

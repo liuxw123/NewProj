@@ -12,13 +12,21 @@ from commonInterface import Common
 
 
 class ModelInterface(Common, metaclass=ABCMeta):
+    """
+    model的公共接口类
+    """
 
-    def __init__(self, key: str) -> None:
-        super().__init__(key)
+    def __init__(self) -> None:
+        super().__init__()
         self.model = None
 
     @abstractmethod
     def creatModel(self, key: str) -> None:
+        """
+        创建model
+        :param key: dst key, for check key.
+        :return:
+        """
         pass
 
 # class PstModel(nn.Module):

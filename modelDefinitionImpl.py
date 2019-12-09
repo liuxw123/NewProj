@@ -13,10 +13,23 @@ from torch import nn
 
 
 class PstModelV0(ModelInterface, nn.Module):
-    # TODO 输入正确的key
-    KEY = "v0-0-0-0"
+    """
+    TODO right key
+
+    v0: 说明这是一个多分类定义模型
+    0 : 模型为第0次定义
+    """
+    KEY = "v0-x-0-x"
+
+    def __init__(self) -> None:
+        super().__init__()
 
     def creatModel(self, key: str) -> None:
+        """
+        创建model
+        :param key: dst key, for check key.
+        :return:
+        """
         self.checkKey(key)
 
         hidden = LAYER
@@ -35,11 +48,11 @@ class PstModelV0(ModelInterface, nn.Module):
 
     def checkKey(self, key: str) -> None:
 
-        version1, sub1, modelVersion1, _ = key.split(DELIMITER)
-        version2, sub2, modelVersion2, _ = PstModelV0.KEY.split(DELIMITER)
+        version1, _, modelVersion1, _ = key.split(DELIMITER)
+        version2, _, modelVersion2, _ = PstModelV0.KEY.split(DELIMITER)
 
         # TODO check key
-        if version1 == version2 and sub1 == sub2 and modelVersion1 == modelVersion2:
+        if version1 == version2 and modelVersion1 == modelVersion2:
             return
         else:
             raise ValueError(VERSION_NOT_SUPPORTED)
