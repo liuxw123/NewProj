@@ -6,7 +6,7 @@
 # Github : https://github.com/liuxw123
 
 from modelConfig import KEY
-from modelDefinition import PstModel
+from modelDefinitionImpl import PstModelV0
 from trainData import TrainData, collate
 from torch.utils.data import DataLoader
 from torch.nn import CrossEntropyLoss
@@ -16,14 +16,14 @@ import torch
 # parameters
 TRAIN_RATE = 0.9
 BATCH_SIZE = 32
-LR = 0.0001
-EPOCH = 100
+LR = 0.001
+EPOCH = 200
 
 dataSet = TrainData(TRAIN_RATE, KEY)  # default is train phase
 dataLoader = DataLoader(dataSet, batch_size=BATCH_SIZE, shuffle=True, num_workers=0, collate_fn=collate)
 lossFunc = CrossEntropyLoss()
 
-model = PstModel(KEY)
+model = PstModelV0(KEY)
 optimizer = Adam(model.parameters(), lr=LR, weight_decay=0.0001)
 
 

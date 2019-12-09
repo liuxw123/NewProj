@@ -7,11 +7,10 @@
 from abc import ABCMeta, abstractmethod
 
 from torch import nn
-from modelConfig import LAYER
 from commonInterface import Common
 
 
-class ModelInterface(Common, metaclass=ABCMeta):
+class ModelInterface(nn.Module, Common, metaclass=ABCMeta):
     """
     model的公共接口类
     """
@@ -28,50 +27,3 @@ class ModelInterface(Common, metaclass=ABCMeta):
         :return:
         """
         pass
-
-# class PstModel(nn.Module):
-#
-#     def __init__(self, key) -> None:
-#         super().__init__()
-#         self.model = None
-#
-#         self.createModel(key)
-#
-#     def createModel(self, key: str):
-#         """
-#         确定方法创建model
-#         :param key:
-#         :return:
-#         """
-#         if key.startswith("v0"):
-#             self.modelV0()
-#
-#     def modelV0(self):
-#         """
-#         v0版本的model创建
-#         :return:
-#
-#         """
-#         hidden = LAYER
-#         part = []
-#
-#         for i in range(len(hidden) - 2):
-#             inChn = hidden[i]
-#             outChn = hidden[i + 1]
-#             part.append(nn.Linear(inChn, outChn))
-#             part.append(nn.ReLU())
-#
-#         part.append(nn.Linear(hidden[-2], hidden[-1]))
-#         part.append(nn.Softmax())
-#
-#         self.model = nn.ModuleList(part)
-#
-#     def forward(self, x):
-#         """
-#
-#         :param x: input data
-#         :return:
-#         """
-#         for layer in self.model:
-#             x = layer(x)
-#         return x

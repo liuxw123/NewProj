@@ -20,9 +20,9 @@ class DataDefinitionImplV0(DataDefinition):
     TODO right key
     
     v0： 说明这是一个多分类定义模型
-    0 ： 三分类
+    3 ： 三分类
     """
-    KEY = "v0-0-x-x"
+    KEY = "v0-3-x-x"
 
     def details(self):
         """

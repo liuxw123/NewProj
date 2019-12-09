@@ -24,6 +24,7 @@ class TrainData(Dataset):
     def __init__(self, trainRate: float, key: str) -> None:
         super().__init__()
 
+        # TODO choose right data process class
         self.xTrain, self.yTrain, self.xTest, self.yTest = DataDefinitionImplV0(trainRate).getData(key)
 
         self.phase = None

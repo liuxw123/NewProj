@@ -12,7 +12,7 @@ from values.strings import VERSION_NOT_SUPPORTED
 from torch import nn
 
 
-class PstModelV0(ModelInterface, nn.Module):
+class PstModelV0(ModelInterface):
     """
     TODO right key
 
@@ -21,8 +21,13 @@ class PstModelV0(ModelInterface, nn.Module):
     """
     KEY = "v0-x-0-x"
 
-    def __init__(self) -> None:
+    def __init__(self, key: str) -> None:
+        """
+        initial
+        :param key: dst key, for check key.
+        """
         super().__init__()
+        self.creatModel(key)
 
     def creatModel(self, key: str) -> None:
         """
@@ -42,7 +47,7 @@ class PstModelV0(ModelInterface, nn.Module):
             part.append(nn.ReLU())
 
         part.append(nn.Linear(hidden[-2], hidden[-1]))
-        part.append(nn.Softmax())
+        part.append(nn.Softmax(dim=1))
 
         self.model = nn.ModuleList(part)
 
