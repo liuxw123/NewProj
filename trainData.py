@@ -15,10 +15,7 @@ import numpy as np
 
 class TrainData(Dataset):
     """
-    data stream:
-                                    TrainData(trainData.py)
-
-
+    use for train dataset.
     """
 
     def __init__(self, trainRate: float, key: str) -> None:
@@ -27,15 +24,23 @@ class TrainData(Dataset):
         # TODO choose right data process class
         self.xTrain, self.yTrain, self.xTest, self.yTest = DataDefinitionImplV0(trainRate).getData(key)
 
+        # training phase: train or test
         self.phase = None
+        # data for training
         self.xData = None
         self.yData = None
+        # number of samples
         self.samples = 0
 
+        # default is train phase
         self.changeToTrainPhase()
 
-    def change(self, phase):
-
+    def change(self, phase: str) -> None:
+        """
+        变更phase
+        :param phase: string. train or test
+        :return:
+        """
         assert phase in ["train", "test"]
 
         self.phase = phase
@@ -49,10 +54,18 @@ class TrainData(Dataset):
 
         self.samples = self.yData.shape[0]
 
-    def changeToTrainPhase(self):
+    def changeToTrainPhase(self) -> None:
+        """
+        变更为 train phase
+        :return:
+        """
         self.change("train")
 
-    def changeToTestPhase(self):
+    def changeToTestPhase(self) -> None:
+        """
+        变更为 test phase
+        :return:
+        """
         self.change("test")
 
     def __getitem__(self, index: int):
@@ -65,6 +78,11 @@ class TrainData(Dataset):
 
 
 def collate(batch):
+    """
+    batch data 提交
+    :param batch: batch data
+    :return:
+    """
     xd = None
     yd = None
     for item in batch:
@@ -78,6 +96,3 @@ def collate(batch):
             yd = np.hstack((yd, y))
 
     return torch.tensor(xd, dtype=torch.float), torch.tensor(yd, dtype=torch.long)
-
-# usage
-# data = TrainData(0.9, "train", "v0-3-1")

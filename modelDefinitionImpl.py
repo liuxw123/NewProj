@@ -2,7 +2,7 @@
 # 文件 : modelDefinitionImpl.py
 # 日期 : 2019/12/9 上午9:53
 # IDE : PyCharm
-# Description : TODO
+# Description : modelDefinition的实现类
 # Github : https://github.com/liuxw123
 
 from modelDefinition import ModelInterface

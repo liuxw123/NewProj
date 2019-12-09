@@ -6,7 +6,7 @@
 # Github : https://github.com/liuxw123
 
 from DataOprt.dataset import DataSet
-from common import NUM_TIMES, NUM_ANTENNA, IS_COMPLEX
+from values.value import NUM_TIMES, NUM_ANTENNA, IS_COMPLEX
 from dataDefinition import DataDefinition
 from modelConfig import DELIMITER
 from DataOprt.utils import arrayString

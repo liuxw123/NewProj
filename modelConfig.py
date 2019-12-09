@@ -5,7 +5,7 @@
 # Description : model configuration
 # Github : https://github.com/liuxw123
 
-from common import *
+from values.value import NUM_ANTENNA, IS_COMPLEX
 
 DELIMITER = "-"
 
